@@ -106,6 +106,7 @@ class Player(pygame.sprite.Sprite):
 
 class Fruit(pygame.sprite.Sprite):
     def __init__(self, game):
+        self.game = game
         self.groups = game.all_sprites, game.fruits
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.image = pygame.Surface((TILESIZE, TILESIZE))
@@ -114,7 +115,23 @@ class Fruit(pygame.sprite.Sprite):
         self.teleport()
 
     def teleport(self):
-        x = random.randint(0, GRIDWIDTH-1)
-        y = random.randint(0, GRIDHEIGHT-1)
+        # Get all possible grid positions
+        possible_positions = set((x,y) for x in range(GRIDWIDTH) for y in range(GRIDHEIGHT))
+        
+        # Get snake occupied positions (body and head)
+        snake_positions = set(self.game.player.tail)
+        snake_positions.add((self.game.player.x, self.game.player.y))
+        
+        # Calculate available positions
+        available_positions = possible_positions - snake_positions
+        
+        # If no positions available, end game - victory
+        if not available_positions:
+            print("You've won!")
+            self.game.playing = False
+            return
+
+        # Choose random position from available ones
+        x, y = random.choice(list(available_positions))
         self.rect.x = x * TILESIZE
         self.rect.y = y * TILESIZE
