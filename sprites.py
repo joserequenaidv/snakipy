@@ -77,14 +77,17 @@ class Player(pygame.sprite.Sprite):
             self.check_death()
 
     def wrap_around_world(self):
-        if self.x > GRIDWIDTH:
+        # Wrap horizontally
+        if self.x >= GRIDWIDTH:
             self.x = 0
-        if self.x > GRIDWIDTH-1:
-            self.x = 0
-        if self.x > GRIDHEIGHT:
-            self.x = 0
-        if self.y > GRIDHEIGHT-1:
+        if self.x < 0:
+            self.x = GRIDWIDTH - 1
+        
+        # Wrap vertically
+        if self.y >= GRIDHEIGHT:
             self.y = 0
+        if self.y < 0:
+            self.y = GRIDHEIGHT - 1
 
     def update_tail(self):
         if len(self.tail) > self.tail_length:
