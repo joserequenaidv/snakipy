@@ -131,7 +131,26 @@ class Fruit(pygame.sprite.Sprite):
             self.game.playing = False
             return
 
-        # Choose random position from available ones
-        x, y = random.choice(list(available_positions))
+        # Divide grid into quadrants
+        quadrant_width = GRIDWIDTH // 2
+        quadrant_height = GRIDHEIGHT // 2
+        
+        # Get snake's current quadrant
+        snake_quadrant_x = self.game.player.x // quadrant_width
+        snake_quadrant_y = self.game.player.y // quadrant_height
+
+        # Get positions in opposite quadrant
+        opposite_quadrant_positions = {
+            (x,y) for (x,y) in available_positions 
+            if (x // quadrant_width) != snake_quadrant_x 
+            and (y // quadrant_height) != snake_quadrant_y
+        }
+
+        # Choose position (prefer opposite quadrant if available)
+        if opposite_quadrant_positions:
+            x, y = random.choice(list(opposite_quadrant_positions))
+        else:
+            x, y = random.choice(list(available_positions))
+
         self.rect.x = x * TILESIZE
         self.rect.y = y * TILESIZE
