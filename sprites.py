@@ -1,16 +1,25 @@
 import pygame
 import random
-import math
 
 from settings import *
 
-#class Background(pygame.sprite.Sprite):
- #   def __init__(self, image_file, location):
-  #      self.groups = game.all_sprites
-   #     pygame.sprite.Sprite.__init__(self)  #call Sprite initializer
-    #    self.image = pygame.image.load(image_file)
-     #   self.rect = self.image.get_rect()
-      #  self.rect.left, self.rect.top = location
+class Background(pygame.sprite.Sprite):
+    def __init__(self, game, location):
+        self.groups = game.all_sprites
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        
+        # Create background surface
+        self.image = pygame.Surface((WIDTH, HEIGHT))
+        self.image.fill((20, 20, 20))  # Dark black background
+        
+        # Create vintage pattern
+        for x in range(0, WIDTH, 20):
+            for y in range(0, HEIGHT, 20):
+                pygame.draw.circle(self.image, (40, 40, 40), (x, y), 2)
+                
+        self.rect = self.image.get_rect()
+        self.rect.left, self.rect.top = location
 
 
 class Player(pygame.sprite.Sprite):
@@ -44,7 +53,7 @@ class Player(pygame.sprite.Sprite):
 
     def move(self):
         self.turn += self.speed * self.game.dt
-
+        
         keystate = pygame.key.get_pressed()
 
         if keystate[pygame.K_LEFT] and self.dx == 0:

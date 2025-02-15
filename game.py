@@ -2,7 +2,7 @@ import math
 import pygame
 
 from settings import *
-from sprites import Player, Fruit
+from sprites import Player, Fruit, Background
 
 class Game:
     # INIT
@@ -17,6 +17,7 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.fruits = pygame.sprite.Group()
 
+        self.background = Background(self, [0, 0])
         self.player = Player(self, 10, 10)
         self.fruit = Fruit(self)
 
@@ -40,6 +41,7 @@ class Game:
     def start_game(self):
         self.all_sprites = pygame.sprite.Group()
         self.fruits = pygame.sprite.Group()
+        self.background = Background(self, [0, 0])
         self.player = Player(self, 10, 10)
         self.fruit = Fruit(self)
         self.score = 0
