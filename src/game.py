@@ -3,6 +3,7 @@ import pygame
 
 from src.settings import *
 from src.sprites import Player, Fruit, Background
+from src.assets import LazyLoader
 
 class Game:
     # INIT
@@ -13,6 +14,8 @@ class Game:
         self.screen = pygame.display.set_mode([WIDTH, HEIGHT])
         pygame.display.set_caption("Snakipy")
         self.clock = pygame.time.Clock()
+
+        self.loader = LazyLoader()
 
         self.all_sprites = pygame.sprite.Group()
         self.fruits = pygame.sprite.Group()
