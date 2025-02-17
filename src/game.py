@@ -1,8 +1,8 @@
 import math
 import pygame
 
-from settings import *
-from sprites import Player, Fruit, Background
+from src.settings import *
+from src.sprites import Player, Fruit, Background
 
 class Game:
     # INIT

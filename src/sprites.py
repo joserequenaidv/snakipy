@@ -1,7 +1,7 @@
 import pygame
 import random
 
-from settings import *
+from src.settings import *
 
 class Background(pygame.sprite.Sprite):
     def __init__(self, game, location):

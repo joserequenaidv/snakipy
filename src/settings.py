@@ -1,4 +1,4 @@
-# define some colors (R, G, B)
+# Define some colors (R, G, B)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 DARKGREY = (40, 40, 40)
@@ -8,7 +8,7 @@ RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 LIGHTBROWN = (175, 126, 47)
 
-# game settings
+# Game settings
 WIDTH = 480
 HEIGHT = 480 
 FPS = 30
@@ -18,3 +18,6 @@ BGCOLOR = LIGHTBROWN
 TILESIZE = 16
 GRIDWIDTH = WIDTH // TILESIZE
 GRIDHEIGHT = HEIGHT // TILESIZE
+
+# Sprite folder
+SPRITE_FOLDER = "assets/images/sprites" 
