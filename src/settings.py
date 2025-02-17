@@ -20,4 +20,9 @@ GRIDWIDTH = WIDTH // TILESIZE
 GRIDHEIGHT = HEIGHT // TILESIZE
 
 # Sprite folder
-SPRITE_FOLDER = "assets/images/sprites" 
+SPRITE_FOLDER = "assets/images/sprites"
+
+# Sprite files and paths
+PLAYER_HEADIMAGE = "test_sprite.png"
+IMAGE_FRUIT = "test_fruit.png"
+IMAGE_BACKGROUND = "test_background.png"

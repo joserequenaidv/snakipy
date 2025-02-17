@@ -10,13 +10,9 @@ class Background(pygame.sprite.Sprite):
         self.game = game
         
         # Create background surface
-        self.image = pygame.Surface((WIDTH, HEIGHT))
-        self.image.fill((20, 20, 20))  # Dark black background
-        
-        # Create vintage pattern
-        for x in range(0, WIDTH, 20):
-            for y in range(0, HEIGHT, 20):
-                pygame.draw.circle(self.image, (40, 40, 40), (x, y), 2)
+        self.image = game.loader.get_image(IMAGE_BACKGROUND)
+        # self.image = pygame.Surface((WIDTH, HEIGHT))
+        # self.image.fill((20, 20, 20))  # Dark black background
                 
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
@@ -27,8 +23,9 @@ class Player(pygame.sprite.Sprite):
         self.groups = game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pygame.Surface((TILESIZE, TILESIZE))
-        self.image.fill(BLACK)
+        # self.image = pygame.Surface((TILESIZE, TILESIZE))
+        self.image = game.loader.get_image(PLAYER_HEADIMAGE)
+        #self.image.fill(BLACK)
         self.rect = self.image.get_rect()
         self.tail_image = pygame.Surface((TILESIZE, TILESIZE))
         self.tail_image.fill(WHITE)
@@ -112,8 +109,9 @@ class Fruit(pygame.sprite.Sprite):
         self.game = game
         self.groups = game.all_sprites, game.fruits
         pygame.sprite.Sprite.__init__(self, self.groups)
-        self.image = pygame.Surface((TILESIZE, TILESIZE))
-        self.image.fill(RED)
+        # self.image = pygame.Surface((TILESIZE, TILESIZE))
+        self.image = game.loader.get_image(IMAGE_FRUIT)
+        # self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.teleport()
 
