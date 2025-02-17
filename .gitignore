@@ -20,6 +20,13 @@ env/
 *.swp
 *.swo
 
+# Inspiration: Sprites, similar games and features
+
+inspiration/
+
+# Assets
+assets/
+
 # OS specific files
 .DS_Store        # Mac
 Thumbs.db        # Windows
@@ -28,3 +35,4 @@ desktop.ini      # Windows
 # Project specific
 assets/temp/     # Temp files
 *.log           # Log files 
+

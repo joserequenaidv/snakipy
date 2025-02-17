@@ -23,6 +23,8 @@ GRIDHEIGHT = HEIGHT // TILESIZE
 SPRITE_FOLDER = "assets/images/sprites"
 
 # Sprite files and paths
-PLAYER_HEADIMAGE = "test_sprite.png"
-IMAGE_FRUIT = "test_fruit.png"
-IMAGE_BACKGROUND = "test_background.png"
+PLAYER_HEADIMAGE = "snake-head/sh1.png"
+IMAGE_FRUIT = "fruits/f1.png"
+IMAGE_BACKGROUND = "backgrounds/bg3.png"
+PLAYER_BODYIMAGE = "snake-body/sb1.png"
+# PLAYER_TAILIMAGE = "snake-tail/st1.png"

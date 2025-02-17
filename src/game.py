@@ -84,7 +84,7 @@ class Game:
             pygame.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
 
         self.all_sprites.draw(self.screen)
-        self.player.draw_tail(self.screen)
+        self.player.draw_body(self.screen)
 
         score_text = self.small_font.render(f"Score: {self.score}", True, WHITE)
         self.screen.blit(score_text, (10, 10))

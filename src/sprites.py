@@ -10,9 +10,11 @@ class Background(pygame.sprite.Sprite):
         self.game = game
         
         # Create background surface
-        self.image = game.loader.get_image(IMAGE_BACKGROUND)
-        # self.image = pygame.Surface((WIDTH, HEIGHT))
-        # self.image.fill((20, 20, 20))  # Dark black background
+        try:
+            self.image = game.loader.get_image(IMAGE_BACKGROUND)
+        except FileNotFoundError:
+            self.image = pygame.Surface((WIDTH, HEIGHT))
+            self.image.fill((20, 20, 20))  # Dark black background
                 
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
@@ -23,24 +25,46 @@ class Player(pygame.sprite.Sprite):
         self.groups = game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        # self.image = pygame.Surface((TILESIZE, TILESIZE))
-        self.image = game.loader.get_image(PLAYER_HEADIMAGE)
-        #self.image.fill(BLACK)
+        
+        # Player head image
+        try:
+            self.image = game.loader.get_image(PLAYER_HEADIMAGE)
+        except FileNotFoundError:
+            self.image = pygame.Surface((TILESIZE, TILESIZE))
+            self.image.fill(BLACK)
+        
         self.rect = self.image.get_rect()
-        self.tail_image = pygame.Surface((TILESIZE, TILESIZE))
-        self.tail_image.fill(WHITE)
+        
+        # Player body image
+        try:
+            self.body_image = game.loader.get_image(PLAYER_BODYIMAGE)
+        except FileNotFoundError:
+            self.body_image = pygame.Surface((TILESIZE, TILESIZE))
+            self.body_image.fill(WHITE)
+        
         self.x = x
         self.y = y
         self.dx = 0
         self.dy = 0
         self.speed = 10
         self.turn = 0
-        self.tail = []
-        self.tail_length = 1
+        self.body = []  
+        self.body_length = 1  
         self.alive = True
 
+    def update_body(self):
+        # Add current position to the body
+        self.body.insert(0, (self.x, self.y))
+        # Keep the body length consistent
+        if len(self.body) > self.body_length:
+            self.body.pop()
+
+    def draw_body(self, screen):
+        for segment in self.body:
+            screen.blit(self.body_image, (segment[0] * TILESIZE, segment[1] * TILESIZE))
+
     def grow(self):
-        self.tail_length += 1
+        self.body_length += 1 
 
     def update(self):
         self.move()
@@ -68,7 +92,7 @@ class Player(pygame.sprite.Sprite):
 
         if (self.turn >= 1):
             self.turn = 0
-            self.update_tail()
+            self.update_body()
             self.x += self.dx
             self.y += self.dy
             self.check_death()
@@ -86,21 +110,21 @@ class Player(pygame.sprite.Sprite):
         if self.y < 0:
             self.y = GRIDHEIGHT - 1
 
-    def update_tail(self):
-        if len(self.tail) > self.tail_length:
-            self.tail.pop()
-        self.tail.insert(0, (self.x, self.y))
+    def update_body(self):
+        if len(self.body) > self.body_length:
+            self.body.pop()
+        self.body.insert(0, (self.x, self.y))
 
 
-    def draw_tail(self, surface):
-        for i in range(0, len(self.tail)):
-            x = self.tail[i][0] * TILESIZE
-            y = self.tail[i][1] * TILESIZE
-            surface.blit(self.tail_image, (x, y))
+    def draw_body(self, surface):
+        for i in range(0, len(self.body)):
+            x = self.body[i][0] * TILESIZE
+            y = self.body[i][1] * TILESIZE
+            surface.blit(self.body_image, (x, y))
 
     def check_death(self):
         is_stopped = self.dx != 0 or self.dy != 0
-        if is_stopped and (self.x, self.y) in self.tail:
+        if is_stopped and (self.x, self.y) in self.body:
             self.alive = False
             print("OUCH!")
 
@@ -109,9 +133,14 @@ class Fruit(pygame.sprite.Sprite):
         self.game = game
         self.groups = game.all_sprites, game.fruits
         pygame.sprite.Sprite.__init__(self, self.groups)
-        # self.image = pygame.Surface((TILESIZE, TILESIZE))
-        self.image = game.loader.get_image(IMAGE_FRUIT)
-        # self.image.fill(RED)
+        
+        # Fruit image
+        try: 
+            self.image = game.loader.get_image(IMAGE_FRUIT)
+        except FileNotFoundError:
+            self.image = pygame.Surface((TILESIZE, TILESIZE))
+            self.image.fill(RED)
+        
         self.rect = self.image.get_rect()
         self.teleport()
 
@@ -120,7 +149,7 @@ class Fruit(pygame.sprite.Sprite):
         possible_positions = set((x,y) for x in range(GRIDWIDTH) for y in range(GRIDHEIGHT))
         
         # Get snake occupied positions (body and head)
-        snake_positions = set(self.game.player.tail)
+        snake_positions = set(self.game.player.body)
         snake_positions.add((self.game.player.x, self.game.player.y))
         
         # Calculate available positions
