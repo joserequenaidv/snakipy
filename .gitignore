@@ -21,8 +21,10 @@ env/
 *.swo
 
 # Inspiration: Sprites, similar games and features
-
 inspiration/
+
+# Project Notes
+project_notes.md
 
 # Assets
 assets/
@@ -35,4 +37,3 @@ desktop.ini      # Windows
 # Project specific
 assets/temp/     # Temp files
 *.log           # Log files 
-

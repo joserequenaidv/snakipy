@@ -1,0 +1,1 @@
+The Bavarian Snake Game is a simple snake game that is a clone of the popular game Snake, but improved. It will use the Aspis Viper as the snake. The snake eats brezels, sausages and other Bavarian stuff.

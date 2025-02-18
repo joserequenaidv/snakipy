@@ -32,6 +32,37 @@ class Game:
 
         self.paused = False
 
+    # MAIN MENU
+    def main_menu(self):
+        menu_options = MENU_OPTIONS
+        selected_option = 0
+
+        while True:
+            self.screen.fill(MAIN_MENU_BG)
+            for i, option in enumerate(menu_options):
+                color = SELECTED_COLOR_MENU if i == selected_option else UNSELECTED_COLOR_MENU
+                font = pygame.font.SysFont(OPTION_TEXT_FONT_TYPE, OPTION_TEXT_FONT_SIZE)
+                option_text = font.render(option, True, color)
+                text_rect = option_text.get_rect()
+                self.screen.blit(option_text, (WIDTH // 2 - text_rect.width // 2, HEIGHT // 5 + i * 80))
+            
+            pygame.display.flip()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        selected_option = (selected_option - 1) % len(menu_options)
+                    if event.key == pygame.K_DOWN:
+                        selected_option = (selected_option + 1) % len(menu_options)
+                    if event.key == pygame.K_RETURN:
+                        if selected_option == 0:
+                            self.start_game()
+                        elif selected_option == 2:
+                            self.display_leaderboard()
+
     # RUN
     def run(self):
         self.playing = True
@@ -105,30 +136,6 @@ class Game:
 
         # Nothing else to draw, let's show it!
         pygame.display.flip()
-
-    # MENU
-    def main_menu(self):
-        title_text = self.large_font.render("SNAKE", True, YELLOW)
-        instructions_text = self.small_font.render("Press any key to begin", True, WHITE)
-
-        self.screen.fill(LIGHTBROWN)
-        self.screen.blit(title_text, (WIDTH // 2 - title_text.get_rect().width//2, HEIGHT // 3 - title_text.get_rect().height//2))
-
-
-        self.screen.blit(instructions_text, (WIDTH // 2 - instructions_text.get_rect().width//2, HEIGHT // 2 - instructions_text.get_rect().height//3))
-
-        pygame.display.flip()
-
-        in_main_menu = True
-
-        while in_main_menu:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                if event.type == pygame.KEYDOWN:
-                    in_main_menu = False
-        self.start_game()
 
     # GAME OVER
     def game_over(self):
