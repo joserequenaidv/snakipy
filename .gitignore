@@ -1,7 +1,15 @@
+# Assets
+assets/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# DATA and TEMP FILES
+data/
+assets/temp/     # Temp files
+*.log           # Log files 
 
 # Distribution / packaging
 dist/
@@ -23,17 +31,10 @@ env/
 # Inspiration: Sprites, similar games and features
 inspiration/
 
-# Project Notes
-project_notes.md
-
-# Assets
-assets/
-
 # OS specific files
 .DS_Store        # Mac
 Thumbs.db        # Windows
 desktop.ini      # Windows
 
-# Project specific
-assets/temp/     # Temp files
-*.log           # Log files 
+# Project Notes
+project_notes.md

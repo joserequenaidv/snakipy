@@ -1,4 +1,5 @@
 import math
+import os
 import pygame
 
 from src.settings import *
@@ -14,6 +15,9 @@ class Game:
         self.screen = pygame.display.set_mode([WIDTH, HEIGHT])
         pygame.display.set_caption("Snakipy")
         self.clock = pygame.time.Clock()
+
+        self.ranking_file = os.path.join(os.path.dirname(__file__), RANKING_FILE_PATH)
+        self.ranking = self.load_ranking()
 
         self.loader = LazyLoader()
 
@@ -61,7 +65,57 @@ class Game:
                         if selected_option == 0:
                             self.start_game()
                         elif selected_option == 2:
-                            self.display_leaderboard()
+                            self.display_ranking()
+
+    # RANKING
+    def load_ranking(self):
+        try:
+            with open(self.ranking_file, "r") as file:
+                scores = [int(line.strip()) for line in file.readlines()]
+                return scores
+        except FileNotFoundError:
+            return []
+
+    def save_ranking(self, score):
+        scores = self.load_ranking()
+        scores.append(score)
+        scores.sort(reverse=True)
+        with open(self.ranking_file, "w") as file:
+            for score in scores:
+                file.write(f"{score}\n")
+
+    def update_ranking(self, new_score):
+        self.ranking.append(new_score)
+        self.ranking.sort(reverse=True)
+        self.ranking = self.ranking[:10]  # Keep top 10 scores
+        self.save_ranking(new_score)
+
+    def display_ranking(self):
+        running = True
+        while running:
+            self.screen.fill(MAIN_MENU_BG)
+            y_offset = 100
+
+            title_text = pygame.font.SysFont(RANKING_TITLE_FONT_TYPE, RANKING_TITLE_FONT_SIZE).render("RANKING", True, RANKING_TITLE_COLOR)
+            self.screen.blit(title_text, (WIDTH // 2 - title_text.get_rect().width // 2, 30))
+        
+            for i, score in enumerate(self.ranking):
+                score_text = pygame.font.SysFont(OPTION_TEXT_FONT_TYPE, OPTION_TEXT_FONT_SIZE).render(f"{i + 1}. {score}", True, WHITE)
+                self.screen.blit(score_text, (WIDTH // 2 - score_text.get_rect().width // 2, y_offset))
+                y_offset += 40
+
+            back_text = pygame.font.SysFont(RANKING_SCORE_FONT_TYPE, RANKING_SCORE_FONT_SIZE).render("Press ENTER to return", True, WHITE)
+            self.screen.blit(back_text, (WIDTH // 2 - back_text.get_rect().width // 2, HEIGHT - 50))
+        
+            pygame.display.flip()   
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:  # Press ENTER to return
+                        running = False      
 
     # RUN
     def run(self):
@@ -151,6 +205,8 @@ class Game:
 
         pygame.display.flip()
         pygame.time.delay(1000)
+
+        self.update_ranking(self.score)
 
         in_game_over = True
 
