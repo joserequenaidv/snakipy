@@ -30,14 +30,20 @@ class Game:
         self.score = 0
         self.font = pygame.font.SysFont("chicken_pie", 24)
 
+        self.paused = False
+
     # RUN
     def run(self):
         self.playing = True
         while self.playing:
             self.dt = self.clock.tick(FPS) / 1000
             self.events()
-            self.update()
-            self.draw()
+            if not self.paused:
+                self.update()
+                self.draw()
+            else:
+                self.draw_pause_message()
+        
         self.game_over()
 
     # START GAME
@@ -59,6 +65,8 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.player.grow()
+                if event.key == pygame.K_p:
+                    self.paused = not self.paused
 
     # UPDATE
     def update(self):
@@ -72,6 +80,12 @@ class Game:
             self.score += 1
 
         self.playing = self.player.alive
+
+    # PAUSE
+    def draw_pause_message(self):
+        pause_text = self.large_font.render("PAUSED", True, WHITE)
+        self.screen.blit(pause_text, (WIDTH // 2 - pause_text.get_rect().width//2, HEIGHT // 2 - pause_text.get_rect().height//2))
+        pygame.display.flip()
 
     # DRAW
     def draw(self):
