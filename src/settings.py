@@ -41,6 +41,6 @@ SPRITE_FOLDER = "assets/images/sprites"
 # Sprite files and paths
 PLAYER_HEADIMAGE = "snake-head/sh1.png"
 IMAGE_FRUIT = "fruits/f1.png"
-IMAGE_BACKGROUND = "backgrounds/bg3.png"
-PLAYER_BODYIMAGE = "snake-body/sb1.png"
+IMAGE_BACKGROUND = "backgrounds/purple-universe.png"
+PLAYER_BODYIMAGE = "snake-body/sb2.png"
 # PLAYER_TAILIMAGE = "snake-tail/st1.png"
