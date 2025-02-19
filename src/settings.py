@@ -19,6 +19,38 @@ TILESIZE = 16
 GRIDWIDTH = WIDTH // TILESIZE
 GRIDHEIGHT = HEIGHT // TILESIZE
 
+FRUIT_TYPES = {
+    "Apple": {
+        "points": 1,
+        "image": "fruits/apple.png",
+        "sound": "apple.mp3"
+    },
+    "Banana": {
+        "points": 2,
+        "image": "fruits/banana.png",
+        "sound": "banana_cherry.mp3"
+    },
+    "Cherry": {
+        "points": 3,
+        "image": "fruits/cherry.png",
+        "sound": "banana_cherry.mp3"
+    }
+}
+
+# SOUNDS
+# Sound settings
+SOUND_FOLDER = "assets/sounds/"
+
+# Sound files
+SOUND_DEATH = "death.wav"
+SOUND_MOVE = "move.wav"
+SOUND_MENU = "menu.wav"
+SOUND_BACKGROUND = "background.mp3"
+
+# Sound volumes (0.0 to 1.0)
+SOUND_EFFECTS_VOLUME = 0.5
+MUSIC_VOLUME = 0.3
+
 # MAIN-MENU Settings
 MENU_OPTIONS = ["PLAY", "OPTIONS", "RANKING"]
 SELECTED_COLOR_MENU = YELLOW
@@ -40,7 +72,6 @@ SPRITE_FOLDER = "assets/images/sprites"
 
 # Sprite files and paths
 PLAYER_HEADIMAGE = "snake-head/sh1.png"
-IMAGE_FRUIT = "fruits/f1.png"
 IMAGE_BACKGROUND = "backgrounds/purple-universe.png"
 PLAYER_BODYIMAGE = "snake-body/sb2.png"
 # PLAYER_TAILIMAGE = "snake-tail/st1.png"
