@@ -130,13 +130,16 @@ class Player(pygame.sprite.Sprite):
 
 class Fruit(pygame.sprite.Sprite):
     def __init__(self, game):
-        self.game = game
         self.groups = game.all_sprites, game.fruits
         pygame.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
         
-        # Fruit image
-        try: 
-            self.image = game.loader.get_image(IMAGE_FRUIT)
+        # Randomly choose a fruit type
+        self.fruit_type = random.choice(list(FRUIT_TYPES.keys()))
+        
+        # Load corresponding image
+        try:
+            self.image = game.loader.get_image(FRUIT_TYPES[self.fruit_type]["image"])
         except FileNotFoundError:
             self.image = pygame.Surface((TILESIZE, TILESIZE))
             self.image.fill(RED)

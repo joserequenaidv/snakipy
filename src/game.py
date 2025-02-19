@@ -4,7 +4,7 @@ import pygame
 
 from src.settings import *
 from src.sprites import Player, Fruit, Background
-from src.assets import LazyLoader
+from src.assets import LazyLoader, SoundManager
 
 class Game:
     # INIT
@@ -20,6 +20,7 @@ class Game:
         self.ranking = self.load_ranking()
 
         self.loader = LazyLoader()
+        self.sound_manager = SoundManager()
 
         self.all_sprites = pygame.sprite.Group()
         self.fruits = pygame.sprite.Group()
@@ -157,12 +158,16 @@ class Game:
     def update(self):
         self.all_sprites.update()
 
+        # Check for collisions with fruits
         hits = pygame.sprite.spritecollide(
             self.player, self.fruits, False)
         for fruit in hits:
             self.player.grow()
             fruit.teleport()
-            self.score += 1
+            # Add points based on fruit type
+            self.score += FRUIT_TYPES[fruit.fruit_type]["points"]
+            # Play the fruit-specific sound
+            self.sound_manager.play_sound(FRUIT_TYPES[fruit.fruit_type]["sound"])
 
         self.playing = self.player.alive
 
