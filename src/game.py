@@ -163,9 +163,10 @@ class Game:
             self.player, self.fruits, False)
         for fruit in hits:
             self.player.grow()
+            points = FRUIT_TYPES[fruit.fruit_type]["points"]
             fruit.teleport()
             # Add points based on fruit type
-            self.score += FRUIT_TYPES[fruit.fruit_type]["points"]
+            self.score += points
             # Play the fruit-specific sound
             self.sound_manager.play_sound(FRUIT_TYPES[fruit.fruit_type]["sound"])
 
