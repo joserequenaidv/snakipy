@@ -162,8 +162,8 @@ class Game:
         hits = pygame.sprite.spritecollide(
             self.player, self.fruits, False)
         for fruit in hits:
-            self.player.grow()
             points = FRUIT_TYPES[fruit.fruit_type]["points"]
+            self.player.grow(points)
             fruit.teleport()
             # Add points based on fruit type
             self.score += points

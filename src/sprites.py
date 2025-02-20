@@ -63,8 +63,8 @@ class Player(pygame.sprite.Sprite):
         for segment in self.body:
             screen.blit(self.body_image, (segment[0] * TILESIZE, segment[1] * TILESIZE))
 
-    def grow(self):
-        self.body_length += 1 
+    def grow(self, amount=1):
+        self.body_length += amount 
 
     def update(self):
         self.move()
