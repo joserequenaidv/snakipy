@@ -130,22 +130,20 @@ class Player(pygame.sprite.Sprite):
 
 class Fruit(pygame.sprite.Sprite):
     def __init__(self, game):
+        self.game = game
         self.groups = game.all_sprites, game.fruits
         pygame.sprite.Sprite.__init__(self, self.groups)
-        self.game = game
-        
-        # Randomly choose a fruit type
+        self.set_random_fruit()
+        self.teleport()
+
+    def set_random_fruit(self):
         self.fruit_type = random.choice(list(FRUIT_TYPES.keys()))
-        
-        # Load corresponding image
         try:
-            self.image = game.loader.get_image(FRUIT_TYPES[self.fruit_type]["image"])
+            self.image = self.game.loader.get_image(FRUIT_TYPES[self.fruit_type]["image"])
         except FileNotFoundError:
             self.image = pygame.Surface((TILESIZE, TILESIZE))
             self.image.fill(RED)
-        
         self.rect = self.image.get_rect()
-        self.teleport()
 
     def teleport(self):
         # Get all possible grid positions
@@ -185,5 +183,6 @@ class Fruit(pygame.sprite.Sprite):
         else:
             x, y = random.choice(list(available_positions))
 
+        self.set_random_fruit()
         self.rect.x = x * TILESIZE
         self.rect.y = y * TILESIZE
