@@ -60,7 +60,9 @@ class SoundManager:
         if sound_file not in self.sounds:
             try:
                 full_path = os.path.join(SOUND_FOLDER, sound_file)
-                self.sounds[sound_file] = pg.mixer.Sound(full_path)
+                sound = pg.mixer.Sound(full_path)
+                sound.set_volume(SOUND_EFFECTS_VOLUME)
+                self.sounds[sound_file] = sound
             except:
                 print(f"Could not load sound: {sound_file}")
                 return
