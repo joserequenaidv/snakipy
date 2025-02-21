@@ -25,10 +25,11 @@ class Player(pygame.sprite.Sprite):
         self.groups = game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
+        self.direction = "right"
         
         # Player head image
         try:
-            self.image = game.loader.get_image(PLAYER_HEADIMAGE)
+            self.image = game.loader.get_image(PLAYER_HEADIMAGE[self.direction]["image"])
         except FileNotFoundError:
             self.image = pygame.Surface((TILESIZE, TILESIZE))
             self.image.fill(BLACK)
@@ -80,15 +81,23 @@ class Player(pygame.sprite.Sprite):
         if keystate[pygame.K_LEFT] and self.dx == 0:
             self.dx = -1
             self.dy = 0
+            self.direction = "left"
+            self.image = self.game.loader.get_image(PLAYER_HEADIMAGE[self.direction]["image"])
         if keystate[pygame.K_RIGHT] and self.dx == 0:
             self.dx = 1
             self.dy = 0
+            self.direction = "right"
+            self.image = self.game.loader.get_image(PLAYER_HEADIMAGE[self.direction]["image"])
         if keystate[pygame.K_UP] and self.dy == 0:
             self.dy = -1
             self.dx = 0
+            self.direction = "up"
+            self.image = self.game.loader.get_image(PLAYER_HEADIMAGE[self.direction]["image"])
         if keystate[pygame.K_DOWN] and self.dy == 0:
             self.dy = 1
             self.dx = 0
+            self.direction = "down"
+            self.image = self.game.loader.get_image(PLAYER_HEADIMAGE[self.direction]["image"])
 
         if (self.turn >= 1):
             self.turn = 0

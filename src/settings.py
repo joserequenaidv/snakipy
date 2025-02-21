@@ -71,7 +71,21 @@ RANKING_TITLE_COLOR = WHITE
 SPRITE_FOLDER = "assets/images/sprites"
 
 # Sprite files and paths
-PLAYER_HEADIMAGE = "snake-head/sh1.png"
+PLAYER_HEADIMAGE = {
+    "up": {
+        "image": "ekans/ekanshead_up.png"
+    },
+    "right": {
+        "image": "ekans/ekanshead_right.png"
+    },
+    "down": {
+        "image": "ekans/ekanshead_down.png"
+    },
+    "left": {
+        "image": "ekans/ekanshead_left.png"
+    }
+}
+
 IMAGE_BACKGROUND = "backgrounds/purple-universe.png"
 PLAYER_BODYIMAGE = "snake-body/sb2.png"
 # PLAYER_TAILIMAGE = "snake-tail/st1.png"
