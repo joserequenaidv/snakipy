@@ -86,6 +86,22 @@ PLAYER_HEADIMAGE = {
     }
 }
 
+PLAYER_NECKIMAGE = {
+    "up": {
+        "image": "ekans/ekansneck_up.png"
+    },
+    "right": {
+        "image": "ekans/ekansneck_right.png"
+    },
+    "down": {
+        "image": "ekans/ekansneck_down.png"
+    },
+    "left": {
+        "image": "ekans/ekansneck_left.png"
+    }
+    
+}
+
 IMAGE_BACKGROUND = "backgrounds/purple-universe.png"
 PLAYER_BODYIMAGE = "snake-body/sb2.png"
 # PLAYER_TAILIMAGE = "snake-tail/st1.png"
