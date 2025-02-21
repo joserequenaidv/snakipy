@@ -72,18 +72,18 @@ SPRITE_FOLDER = "assets/images/sprites"
 
 # Sprite files and paths
 PLAYER_HEADIMAGE = {
-    "up": {
-        "image": "ekans/ekanshead_up.png"
-    },
     "right": {
-        "image": "ekans/ekanshead_right.png"
+        "image": "ekans/ekanshead1.png"
     },
     "down": {
-        "image": "ekans/ekanshead_down.png"
+        "image": "ekans/ekanshead2.png"
     },
     "left": {
-        "image": "ekans/ekanshead_left.png"
-    }
+        "image": "ekans/ekanshead3.png"
+    },
+    "up": {
+        "image": "ekans/ekanshead4.png"
+    },
 }
 
 PLAYER_NECKIMAGE = {
