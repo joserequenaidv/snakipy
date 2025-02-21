@@ -73,35 +73,78 @@ SPRITE_FOLDER = "assets/images/sprites"
 # Sprite files and paths
 PLAYER_HEADIMAGE = {
     "right": {
-        "image": "ekans/ekanshead1.png"
+        "image": "ekans/head/ekanshead1.png"
     },
     "down": {
-        "image": "ekans/ekanshead2.png"
+        "image": "ekans/head/ekanshead2.png"
     },
     "left": {
-        "image": "ekans/ekanshead3.png"
+        "image": "ekans/head/ekanshead3.png"
     },
     "up": {
-        "image": "ekans/ekanshead4.png"
+        "image": "ekans/head/ekanshead4.png"
     },
 }
 
 PLAYER_NECKIMAGE = {
-    "up": {
-        "image": "ekans/ekansneck_up.png"
-    },
     "right": {
-        "image": "ekans/ekansneck_right.png"
+        "image": "ekans/neck/ekansneck1.png"
     },
     "down": {
-        "image": "ekans/ekansneck_down.png"
+        "image": "ekans/neck/ekansneck2.png"
     },
     "left": {
-        "image": "ekans/ekansneck_left.png"
+        "image": "ekans/neck/ekansneck3.png"
+    },
+    "up": {
+        "image": "ekans/neck/ekansneck4.png"
     }
-    
+}
+
+PLAYER_TAIL_TIP_IMAGE = {
+    "right": {
+        "image": "ekans/tail/ekanstailtip1.png"
+    },
+    "down": {
+        "image": "ekans/tail/ekanstailtip2.png"
+    },
+    "left": {
+        "image": "ekans/tail/ekanstailtip3.png"
+    },
+    "up": {
+        "image": "ekans/tail/ekanstailtip4.png"
+    }
+}
+
+PLAYER_TAIL_JOINT_IMAGE = {
+    "right": {
+        "image": "ekans/ekanstailjoint1.png"
+    },
+    "down": {
+        "image": "ekans/ekanstailjoint2.png"
+    },
+    "left": {
+        "image": "ekans/ekanstailjoint3.png"
+    },
+    "up": {
+        "image": "ekans/ekanstailjoint4.png"
+    }
+}
+
+PLAYER_BODYIMAGE = {
+    "right": {
+        "image": "ekans/ekansbody1.png"
+    },
+    "down": {
+        "image": "ekans/ekansbody2.png"
+    },
+    "left": {
+        "image": "ekans/ekansbody3.png"
+    },
+    "up": {
+        "image": "ekans/ekansbody4.png"
+    }
 }
 
 IMAGE_BACKGROUND = "backgrounds/purple-universe.png"
-PLAYER_BODYIMAGE = "snake-body/sb2.png"
 # PLAYER_TAILIMAGE = "snake-tail/st1.png"

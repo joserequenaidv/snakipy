@@ -38,7 +38,7 @@ class Player(pygame.sprite.Sprite):
         
         # Player body image
         try:
-            self.body_image = game.loader.get_image(PLAYER_BODYIMAGE)
+            self.body_image = game.loader.get_image(PLAYER_BODYIMAGE[self.direction]["image"])
         except FileNotFoundError:
             self.body_image = pygame.Surface((TILESIZE, TILESIZE))
             self.body_image.fill(WHITE)
@@ -83,21 +83,25 @@ class Player(pygame.sprite.Sprite):
             self.dy = 0
             self.direction = "left"
             self.image = self.game.loader.get_image(PLAYER_HEADIMAGE[self.direction]["image"])
+            self.body_image = self.game.loader.get_image(PLAYER_NECKIMAGE[self.direction]["image"])
         if keystate[pygame.K_RIGHT] and self.dx == 0:
             self.dx = 1
             self.dy = 0
             self.direction = "right"
             self.image = self.game.loader.get_image(PLAYER_HEADIMAGE[self.direction]["image"])
+            self.body_image = self.game.loader.get_image(PLAYER_NECKIMAGE[self.direction]["image"])
         if keystate[pygame.K_UP] and self.dy == 0:
             self.dy = -1
             self.dx = 0
             self.direction = "up"
             self.image = self.game.loader.get_image(PLAYER_HEADIMAGE[self.direction]["image"])
+            self.body_image = self.game.loader.get_image(PLAYER_NECKIMAGE[self.direction]["image"])
         if keystate[pygame.K_DOWN] and self.dy == 0:
             self.dy = 1
             self.dx = 0
             self.direction = "down"
             self.image = self.game.loader.get_image(PLAYER_HEADIMAGE[self.direction]["image"])
+            self.body_image = self.game.loader.get_image(PLAYER_NECKIMAGE[self.direction]["image"])
 
         if (self.turn >= 1):
             self.turn = 0
