@@ -1,10 +1,10 @@
-import math
 import os
 import pygame
 
 from src.settings import *
 from src.sprites import Player, Fruit, Background
 from src.assets import LazyLoader, SoundManager
+from src.menu import MainMenu, RankingMenu
 
 class Game:
     # INIT
@@ -37,36 +37,12 @@ class Game:
 
         self.paused = False
 
+        self.menu = MainMenu(self)
+        self.ranking_menu = RankingMenu(self)
+
     # MAIN MENU
-    def main_menu(self):
-        menu_options = MENU_OPTIONS
-        selected_option = 0
-
-        while True:
-            self.screen.fill(MAIN_MENU_BG)
-            for i, option in enumerate(menu_options):
-                color = SELECTED_COLOR_MENU if i == selected_option else UNSELECTED_COLOR_MENU
-                font = pygame.font.SysFont(OPTION_TEXT_FONT_TYPE, OPTION_TEXT_FONT_SIZE)
-                option_text = font.render(option, True, color)
-                text_rect = option_text.get_rect()
-                self.screen.blit(option_text, (WIDTH // 2 - text_rect.width // 2, HEIGHT // 5 + i * 80))
-            
-            pygame.display.flip()
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP:
-                        selected_option = (selected_option - 1) % len(menu_options)
-                    if event.key == pygame.K_DOWN:
-                        selected_option = (selected_option + 1) % len(menu_options)
-                    if event.key == pygame.K_RETURN:
-                        if selected_option == 0:
-                            self.start_game()
-                        elif selected_option == 2:
-                            self.display_ranking()
+    def show_main_menu(self):
+        self.menu.display()
 
     # RANKING
     def load_ranking(self):
@@ -92,31 +68,7 @@ class Game:
         self.save_ranking(new_score)
 
     def display_ranking(self):
-        running = True
-        while running:
-            self.screen.fill(MAIN_MENU_BG)
-            y_offset = 100
-
-            title_text = pygame.font.SysFont(RANKING_TITLE_FONT_TYPE, RANKING_TITLE_FONT_SIZE).render("RANKING", True, RANKING_TITLE_COLOR)
-            self.screen.blit(title_text, (WIDTH // 2 - title_text.get_rect().width // 2, 30))
-        
-            for i, score in enumerate(self.ranking):
-                score_text = pygame.font.SysFont(OPTION_TEXT_FONT_TYPE, OPTION_TEXT_FONT_SIZE).render(f"{i + 1}. {score}", True, WHITE)
-                self.screen.blit(score_text, (WIDTH // 2 - score_text.get_rect().width // 2, y_offset))
-                y_offset += 40
-
-            back_text = pygame.font.SysFont(RANKING_SCORE_FONT_TYPE, RANKING_SCORE_FONT_SIZE).render("Press ENTER to return", True, WHITE)
-            self.screen.blit(back_text, (WIDTH // 2 - back_text.get_rect().width // 2, HEIGHT - 50))
-        
-            pygame.display.flip()   
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:  # Press ENTER to return
-                        running = False      
+        self.ranking_menu.display()
 
     # RUN
     def run(self):
@@ -228,5 +180,5 @@ class Game:
 
 
 game = Game()
-game.main_menu()
+game.show_main_menu()
 game.run()
