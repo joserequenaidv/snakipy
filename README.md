@@ -2,7 +2,7 @@
 This is Snakipy, a simple snake game made with Pygame 5 years ago with the purpose of learning the basics of Pygame. I abandoned the project back then and now I'm starting it again (Feb 2025) to learn more about Pygame and Python.
 
 ## Current look of the game (FEB 18 2025):
-![Snakipy]([https://imgur.com/a/GzvbFLA](https://i.imgur.com/JKIXeL6.png)
+![Snakipy](https://i.imgur.com/JKIXeL6.png)
 
 <details>
 <summary><strong>FEATURES ADDED ALREADY</strong></summary>
